@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-brand-name>Store</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+  <!-- Trust Bar (New) -->
+  <div class="trust-bar">
+    <div class="container">
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5l10 -10"></path></svg>
+        Free Shipping on Orders Over $100
+      </div>
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        Secure Payment Options
+      </div>
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"></path><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path></svg>
+        Premium Quality Guarantee
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="./index.html" class="brand-logo" data-brand-name>Brand</a>
+      <div class="nav-links">
+        <a href="./products.html">Shop All</a>
+        <a href="./products.html?category=new">New Arrivals</a>
+        <a href="./sale.html" style="color: #DC2626; font-weight: 600;">Sale</a>
+      </div>
+      <div class="nav-actions">
+        <a href="./login.html" class="user-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </a>
+        <a href="./cart.html" class="cart-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="cart-badge" id="cartBadge" style="display: none;">0</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+      <div class="container">
+        <div id="loadingState" style="padding: 4rem 0;">
+          <div class="product-detail-grid">
+            <div class="skeleton" style="height: 500px;"></div>
+            <div>
+              <div class="skeleton" style="height: 40px; margin-bottom: 1rem;"></div>
+              <div class="skeleton" style="height: 30px; margin-bottom: 2rem; width: 150px;"></div>
+              <div class="skeleton" style="height: 100px; margin-bottom: 2rem;"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div id="productDetail" style="display: none;">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Size Guide Modal -->
+        <div class="modal-overlay" id="sizeGuideModal">
+          <div class="modal-content">
+            <button class="modal-close" onclick="document.getElementById('sizeGuideModal').classList.remove('active')">&times;</button>
+            <h2 style="margin-bottom: 1.5rem;">Size Guide</h2>
+            <p style="margin-bottom: 1rem; color: var(--text-muted);">Find your perfect fit. Measurements are in inches.</p>
+            <table style="width: 100%; text-align: left; border-collapse: collapse;">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--border-color);">
+                  <th style="padding: 0.75rem;">Size</th>
+                  <th style="padding: 0.75rem;">Chest</th>
+                  <th style="padding: 0.75rem;">Length</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--border-color);"><td style="padding: 0.75rem;">S</td><td style="padding: 0.75rem;">38-40</td><td style="padding: 0.75rem;">28</td></tr>
+                <tr style="border-bottom: 1px solid var(--border-color);"><td style="padding: 0.75rem;">M</td><td style="padding: 0.75rem;">40-42</td><td style="padding: 0.75rem;">29</td></tr>
+                <tr style="border-bottom: 1px solid var(--border-color);"><td style="padding: 0.75rem;">L</td><td style="padding: 0.75rem;">42-44</td><td style="padding: 0.75rem;">30</td></tr>
+                <tr style="border-bottom: 1px solid var(--border-color);"><td style="padding: 0.75rem;">XL</td><td style="padding: 0.75rem;">44-46</td><td style="padding: 0.75rem;">31</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    
+  </main>
+  <!-- Mega Footer -->
+  <footer class="mega-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3 data-brand-name>Brand</h3>
+          <p>We craft premium vibrant apparel for those who want to stand out. Our mission is to provide high-quality, sustainable fashion.</p>
+          <div style="margin-top: 1.5rem;">
+            <p><strong>Subscribe to our newsletter</strong></p>
+            <form style="display: flex; gap: 0.5rem; margin-top: 0.5rem;" onsubmit="event.preventDefault(); alert('Subscribed!');">
+              <input type="email" placeholder="Email address" class="form-control" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white;" required>
+              <button type="submit" class="btn btn-primary" style="padding: 0.5rem 1rem;">Go</button>
+            </form>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Shop</h3>
+          <ul class="footer-links">
+            <li><a href="./products.html">All Products</a></li>
+            <li><a href="./sale.html">Sale</a></li>
+            <li><a href="./blog.html">Lookbook</a></li>
+            <li><a href="./gift-cards.html">Gift Cards</a></li>
+            <li><a href="./store-locator.html">Store Locator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Support</h3>
+          <ul class="footer-links">
+            <li><a href="./faq.html">FAQ</a></li>
+            <li><a href="./contact.html">Contact Us</a></li>
+            <li><a href="./shipping-policy.html">Shipping & Delivery</a></li>
+            <li><a href="./returns.html">Returns Center</a></li>
+            <li><a href="./size-guide.html">Size Guide</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Company</h3>
+          <ul class="footer-links">
+            <li><a href="./about.html">Our Story</a></li>
+            <li><a href="./terms.html">Terms & Conditions</a></li>
+            <li><a href="./privacy.html">Privacy Policy</a></li>
+            <li><a href="./returns-policy.html">Refund Policy</a></li>
+            <li><a href="./security.html">Payment Security</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 <span data-brand-name>Brand</span>. All rights reserved.</div>
+        <div class="payment-icons">
+          <!-- Trust/Payment Badges -->
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+          const urlParams = new URLSearchParams(window.location.search);
+          const slug = urlParams.get('slug');
+          
+          const loadingState = document.getElementById('loadingState');
+          const productDetail = document.getElementById('productDetail');
+
+          if (!slug) {
+            loadingState.innerHTML = '<p class="text-center">Product not found.</p>';
+            return;
+          }
+
+          try {
+            const res = await fetchProducts({ search: slug });
+            const product = res.data && res.data.find(p => p.slug === slug);
+            
+            if (!product) {
+              loadingState.innerHTML = '<p class="text-center mt-8">Product not found.</p>';
+              return;
+            }
+
+            document.title = `${product.name} — Store`;
+
+            const images = product.product_images && product.product_images.length > 0 
+              ? product.product_images 
+              : [{ url: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=80', id: 'default' }];
+            
+            let activeImage = images[0].url;
+            let selectedVariant = product.product_variants && product.product_variants.length > 0 
+              ? product.product_variants[0] 
+              : null;
+
+            const comparePriceHtml = product.compare_price 
+              ? `<span class="compare-price">${formatCurrency(product.compare_price)}</span>` 
+              : '';
+
+            function render() {
+              loadingState.style.display = 'none';
+              productDetail.style.display = 'block';
+              
+              let variantsHtml = '';
+              if (product.product_variants && product.product_variants.length > 0) {
+                variantsHtml = `
+                  <div class="variant-selector new-variant-selector">
+                    <div class="variant-header">
+                      <h3 class="section-heading">SELECT SIZE</h3>
+                      <span class="size-guide-link" onclick="document.getElementById('sizeGuideModal').classList.add('active')">SIZE GUIDE</span>
+                    </div>
+                    <div class="variant-options">
+                      ${product.product_variants.map(v => `
+                        <button class="variant-btn ${selectedVariant && selectedVariant.id === v.id ? 'selected' : ''}" data-variant-id="${v.id}">
+                          ${v.name}
+                        </button>
+                      `).join('')}
+                    </div>
+                  </div>
+                `;
+              }
+              
+              let thumbnailsHtml = '';
+              if (images.length > 1) {
+                thumbnailsHtml = `
+                  <div class="thumbnail-list">
+                    ${images.map(img => `
+                      <img src="${img.url}" class="thumbnail ${img.url === activeImage ? 'active' : ''}" data-img="${img.url}">
+                    `).join('')}
+                  </div>
+                `;
+              }
+
+              productDetail.innerHTML = `
+                <nav aria-label="breadcrumb" class="breadcrumb" style="margin-bottom: 1.5rem; font-size: 0.875rem; color: var(--text-muted);">
+                  <ol style="list-style: none; padding: 0; margin: 0; display: flex; gap: 0.5rem;">
+                    <li><a href="./index.html">Home</a></li>
+                    <li aria-hidden="true">&gt;</li>
+                    <li aria-current="page"><span>${product.name}</span></li>
+                  </ol>
+                </nav>
+                
+                <script type="application/ld+json">
+                {
+                  "@context": "https://schema.org",
+                  "@type": "BreadcrumbList",
+                  "itemListElement": [{
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "${window.location.origin}/index.html"
+                  },{
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "${product.name}",
+                    "item": "${window.location.href}"
+                  }]
+                }
+                <\/script>
+                
+                <div class="product-layout-new">
+                  <!-- Left: Image Grid -->
+                  <div class="product-gallery-new">
+                    ${images.map((img, index) => `
+                      <div class="gallery-img-wrapper ${index === 0 ? 'large' : ''}">
+                        <img src="${img.url}" alt="${product.name}" loading="lazy">
+                      </div>
+                    `).join('')}
+                  </div>
+                  
+                  <!-- Right: Sticky Info -->
+                  <div class="product-info-new-wrapper">
+                    <div class="product-info-new">
+                      
+                      <!-- Sale Timer -->
+                      <div class="sale-timer-banner">
+                        SALE ENDS IN : <span class="timer-countdown">02h : 42m : 09s</span>
+                      </div>
+                      
+                      <!-- Price Block -->
+                      <div class="price-header">
+                        <div class="price-main">
+                          <span class="current-price">${formatCurrency(selectedVariant ? selectedVariant.price : product.price)}</span>
+                          ${comparePriceHtml}
+                          ${product.compare_price ? '<span class="discount-badge">54% OFF</span>' : ''}
+                        </div>
+                        <button class="share-btn">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                        </button>
+                      </div>
+                      <p class="taxes-text">Inclusive of all taxes</p>
+                      
+                      <h1 class="product-title-new">${product.name}</h1>
+                      <div class="social-proof">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        65 people bought this in last 7 days
+                      </div>
+                      
+                      <!-- Offers -->
+                      <div class="offers-section">
+                        <h3 class="section-heading">OFFERS</h3>
+                        <div class="offer-box">
+                          <span class="offer-badge">Best Offer</span>
+                          <div class="offer-content">
+                            <div class="offer-icon">
+                              <div class="circle-group">
+                                <div class="c1"></div><div class="c2"></div>
+                              </div>
+                            </div>
+                            <div class="offer-text">
+                              <strong>Get at ₹1,105</strong> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                              <p>BUY 3 & GET 15% OFF ON PREMIUM COLLECTION</p>
+                            </div>
+                            <button class="explore-btn">Explore ↗</button>
+                          </div>
+                        </div>
+                        
+                        <div class="extra-discount-strip">
+                          <span class="upi-icons">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg" style="height:12px;display:inline;" alt="UPI">
+                          </span>
+                          Get Extra Discount At Checkout
+                        </div>
+                      </div>
+                      
+                      <!-- Color -->
+                      <div class="color-section">
+                        <h3 class="section-heading">COLOR - <span class="selected-color-name">SWANWHITE</span></h3>
+                        <div class="color-thumbnails">
+                          ${images.map((img, idx) => `
+                            <img src="${img.url}" class="color-thumb ${idx === 0 ? 'active' : ''}">
+                          `).join('')}
+                        </div>
+                      </div>
+                      
+                      <!-- Size -->
+                      ${variantsHtml}
+                      
+                      <!-- Add to Cart -->
+                      <div class="add-to-cart-wrapper new-atc-wrapper">
+                        <input type="number" id="qtyInput" class="qty-input" value="1" min="1" max="${product.stock_quantity || 99}" style="display:none;">
+                        <button id="addToCartBtn" class="btn btn-primary btn-block new-atc-btn" ${product.stock_status === 'out_of_stock' ? 'disabled' : ''}>
+                          ${product.stock_status === 'out_of_stock' ? 'OUT OF STOCK' : 'ADD TO CART'}
+                        </button>
+                      </div>
+                      
+                      <!-- Delivery -->
+                      <div class="delivery-section">
+                        <h3 class="section-heading">DELIVERY DETAILS</h3>
+                        <div class="pincode-input-group">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                          <input type="text" placeholder="Enter Pincode (e.g. 452010)" value="452010">
+                          <button class="check-btn">CHECK</button>
+                        </div>
+                        <p class="delivery-estimate">🚚 Get this Product by <strong>Thu, 20 Aug</strong></p>
+                      </div>
+                      
+                      <!-- Key Highlights -->
+                      <div class="highlights-section">
+                        <h3 class="section-heading">KEY HIGHLIGHTS</h3>
+                        <div class="highlights-grid">
+                          <div class="hl-item">
+                            <span class="hl-label">Product Category</span>
+                            <span class="hl-value">Topwear</span>
+                          </div>
+                          <div class="hl-item">
+                            <span class="hl-label">Product Type</span>
+                            <span class="hl-value">Oversized Tshirt</span>
+                          </div>
+                          <div class="hl-item">
+                            <span class="hl-label">Fit</span>
+                            <span class="hl-value">Oversized Fit</span>
+                          </div>
+                          <div class="hl-item">
+                            <span class="hl-label">Closure</span>
+                            <span class="hl-value">No Closure</span>
+                          </div>
+                          <div class="hl-item">
+                            <span class="hl-label">Length</span>
+                            <span class="hl-value">Regular</span>
+                          </div>
+                          <div class="hl-item">
+                            <span class="hl-label">Fabric</span>
+                            <span class="hl-value">100% Cotton</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- Accordions -->
+                      <div class="product-accordions">
+                        <h3 class="section-heading">PRODUCT INFORMATION</h3>
+                        
+                        <div class="accordion">
+                          <div class="accordion-header">
+                            <div class="acc-title">
+                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="acc-icon" style="color: #E879F9;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                              <div>
+                                <strong>Product Description</strong>
+                                <span>Manufacture, Care and Fit</span>
+                              </div>
+                            </div>
+                            <span class="acc-toggle">+</span>
+                          </div>
+                          <div class="accordion-content">
+                            <div class="description">${product.description || product.short_description || 'A premium garment crafted with precision.'}</div>
+                          </div>
+                        </div>
+                        
+                        <div class="accordion">
+                          <div class="accordion-header">
+                            <div class="acc-title">
+                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="acc-icon" style="color: #34D399;"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                              <div>
+                                <strong>Shipping Info</strong>
+                                <span>We offer free shipping across India</span>
+                              </div>
+                            </div>
+                            <span class="acc-toggle">+</span>
+                          </div>
+                          <div class="accordion-content">
+                            <p>Free standard shipping on all orders. Express delivery available.</p>
+                          </div>
+                        </div>
+                        
+                        <div class="accordion">
+                          <div class="accordion-header">
+                            <div class="acc-title">
+                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="acc-icon" style="color: #FCD34D;"><path d="M21.5 2v6h-6M2.13 15.57a9 9 0 1 0 3.15-11.43L2 6"></path></svg>
+                              <div>
+                                <strong>7 Days Returns & Exchange</strong>
+                                <span>Know about return & exchange policy</span>
+                              </div>
+                            </div>
+                            <span class="acc-toggle">+</span>
+                          </div>
+                          <div class="accordion-content">
+                            <p>You can return or exchange this item within 7 days of delivery.</p>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- Trust Features -->
+                      <div class="trust-features-grid">
+                        <div class="trust-feature">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                          <span>CASH ON<br>DELIVERY</span>
+                        </div>
+                        <div class="trust-feature">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                          <span>FREE SHIPPING<br>ON ALL ORDERS</span>
+                        </div>
+                        <div class="trust-feature">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.92-12.28l5.57 5.57"></path></svg>
+                          <span>EASY<br>RETURNS</span>
+                        </div>
+                      </div>
+                      
+                      <!-- Reviews -->
+                      <div class="reviews-section-new">
+                        <h3 class="section-heading">CUSTOMER REVIEWS</h3>
+                        <div class="reviews-header-new">
+                          <div class="stars-new">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            <span class="review-prompt">Be the first to write a review</span>
+                          </div>
+                          <button class="write-review-btn">WRITE A REVIEW</button>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Related Products Placeholder -->
+                <div class="section" style="padding-top: 4rem;">
+                  <h2 style="font-size: 1.5rem; margin-bottom: 2rem; text-align: center;">RECENTLY VIEWED PRODUCTS</h2>
+                  <div class="grid product-grid" id="relatedProducts">
+                    <div class="skeleton skeleton-card"></div>
+                    <div class="skeleton skeleton-card"></div>
+                    <div class="skeleton skeleton-card"></div>
+                    <div class="skeleton skeleton-card"></div>
+                  </div>
+                </div>
+              `;
+
+              // Event Listeners for render
+              document.querySelectorAll('.thumbnail').forEach(th => {
+                th.addEventListener('click', (e) => {
+                  activeImage = e.target.getAttribute('data-img');
+                  render();
+                });
+              });
+
+              document.querySelectorAll('.variant-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                  const vid = e.target.getAttribute('data-variant-id');
+                  selectedVariant = product.product_variants.find(v => v.id === vid);
+                  render();
+                });
+              });
+
+              // Accordion logic
+              document.querySelectorAll('.accordion-header').forEach(header => {
+                header.addEventListener('click', () => {
+                  const accordion = header.parentElement;
+                  const isActive = accordion.classList.contains('active');
+                  
+                  // Close all
+                  document.querySelectorAll('.accordion').forEach(a => {
+                    a.classList.remove('active');
+                    a.querySelector('.acc-toggle').textContent = '+';
+                  });
+                  
+                  if (!isActive) {
+                    accordion.classList.add('active');
+                    accordion.querySelector('.acc-toggle').textContent = '-';
+                  }
+                });
+              });
+
+              const addToCartBtn = document.getElementById('addToCartBtn');
+              if (addToCartBtn) {
+                addToCartBtn.addEventListener('click', () => {
+                  const qty = parseInt(document.getElementById('qtyInput').value) || 1;
+                  addToCart(product, selectedVariant, qty);
+                });
+              }
+
+              // Load related mock
+              setTimeout(() => {
+                const rel = document.getElementById('relatedProducts');
+                if(rel) rel.innerHTML = '<p style="color:var(--text-muted);">Related products will appear here...</p>';
+              }, 1000);
+            }
+
+            render();
+
+          } catch (err) {
+            loadingState.innerHTML = '<p class="text-center mt-8 text-red">Failed to load product details.</p>';
+          }
+        });
+      </script>
+    
